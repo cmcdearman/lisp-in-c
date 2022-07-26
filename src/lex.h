@@ -4,10 +4,11 @@
 #include <stdbool.h>
 #include "token.h"
 #include <ctype.h>
+#include "stream.h"
 
 #define MAX_NUM_CHARS 32
 #define MAX_IDENT_CHARS 255
 
-TokenStream *lex(char*);
+TokenStream *lex(Stream*);
 
 #endif

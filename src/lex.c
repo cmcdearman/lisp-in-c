@@ -1,58 +1,73 @@
 #include "lex.h"
+#include "stream.h"
+#include "token.h"
+#include <ctype.h>
 
 bool is_whitespace(char c) {
   return c == ' ' || c == '\t' || c == '\f' || c == '\v';
 }
 
-TokenStream *lex(char *src) {
-  TokenStream *stream = new_tok_stream();
-  for (int i = 0; i < strlen(src); i++) {
-    char c = src[i];
+TokenStream *lex(Stream* stream) {
+  TokenStream *tok_stream = new_tok_stream();
+	char c;
+  while ((c = stream_peek(stream))) {
+    char c = stream_next(stream);
     switch (c) {
     case '+':
-      tok_stream_push(stream, new_tok(TOK_ADD, "+"));
+      tok_stream_push(tok_stream, new_tok(TOK_ADD, "+"));
       break;
     case '-':
-      tok_stream_push(stream, new_tok(TOK_SUB, "-"));
+      tok_stream_push(tok_stream, new_tok(TOK_SUB, "-"));
       break;
     case '*':
-      tok_stream_push(stream, new_tok(TOK_MUL, "*"));
+      tok_stream_push(tok_stream, new_tok(TOK_MUL, "*"));
       break;
     case '\\':
-      tok_stream_push(stream, new_tok(TOK_QUO, "\\"));
+      tok_stream_push(tok_stream, new_tok(TOK_QUO, "\\"));
       break;
     case '%':
-      tok_stream_push(stream, new_tok(TOK_MOD, "%"));
+      tok_stream_push(tok_stream, new_tok(TOK_MOD, "%"));
       break;
     case '(':
-      tok_stream_push(stream, new_tok(TOK_LPAREN, "("));
+      tok_stream_push(tok_stream, new_tok(TOK_LPAREN, "("));
       break;
     case ')':
-      tok_stream_push(stream, new_tok(TOK_RPAREN, ")"));
+      tok_stream_push(tok_stream, new_tok(TOK_RPAREN, ")"));
       break;
     default:
       if (is_whitespace(c)) {
-        tok_stream_push(stream, new_tok(TOK_WS, "<Whitespace>"));
+        tok_stream_push(tok_stream, new_tok(TOK_WS, "<Whitespace>"));
       } else if (isdigit(c)) {
         char *num_lit = calloc(MAX_NUM_CHARS, sizeof(char));
-        int start = i;
+				int i = 0;
         while (isdigit(c) || c == '.') {
-          if (i - start == MAX_NUM_CHARS) {
-            tok_stream_push(stream, new_tok(TOK_ERR, "<Error>"));
+          if (i >= MAX_NUM_CHARS) {
+            tok_stream_push(tok_stream, new_tok(TOK_ERR, "<Error>"));
             break;
           }
-          num_lit[i - start] = c;
-          i++;
+          num_lit[i++] = c;
         }
-        if (!isdigit(num_lit[i - start])) {
-					tok_stream_push(stream, new_tok(TOK_ERR, "<Error>"));
+        if (!isdigit(num_lit[i-1])) {
+					tok_stream_push(tok_stream, new_tok(TOK_ERR, "<Error>"));
 					break;
         }
-      } else {
-        tok_stream_push(stream, new_tok(TOK_ERR, "<Error>"));
+      } else if (isalpha(c) || c == '_') {
+				char *ident = calloc(MAX_IDENT_CHARS, sizeof(char));
+				int i = 0;
+				while (isalnum(c)) {
+					if (i >= MAX_IDENT_CHARS) {
+            tok_stream_push(tok_stream, new_tok(TOK_ERR, "<Error>"));
+            break;
+					}
+					ident[i++] = c;
+				}
+				tok_stream_push(tok_stream, new_tok(TOK_IDENT, ident));
+			} else {
+        tok_stream_push(tok_stream, new_tok(TOK_ERR, "<Error>"));
       }
       break;
     }
   }
-  return stream;
+	tok_stream_push(tok_stream, new_tok(TOK_EOF, "<Eof>"));
+  return tok_stream;
 }

@@ -1,14 +1,23 @@
 #include <stdio.h>
+#include "stream.h"
+#include "token.h"
+#include "lex.h"
 
 int main() {
-	FILE* file = fopen("examples/simple.egl", "r");
-	if (!file) {
-		printf("Error: file does not exist\n");
-		return -1;
+	Stream* stream = new_stream_from_path("examples/simple.egl");
+	//int c;
+	//while ((c = stream_next(stream)) != EOF) {
+	//	putchar(c);
+	//}
+	TokenStream *tokens = lex(stream);
+	while (true) {
+		Token *tok = malloc(sizeof(Token));
+		if ((tok = tok_stream_next(tokens))->type != TOK_EOF) {
+			printf("Token { Type: Type, Lit: %s}", tok->lit);	
+			free(tok);
+		} else {
+			return 0;
+		}
 	}
-	int c;
-	while ((c = getc(file)) != EOF)
-		putchar(c);
-	fclose(file);
 	return 0;
 }

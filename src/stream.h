@@ -7,13 +7,14 @@
 
 // A Stream is an abstraction over files and strings for source input
 typedef struct {
-	char* path;
-	String* src;	
+	String path;
+	String src;	
 	size_t pos;
 } Stream;
 
-Stream* new_stream_from_path(char*);
-Stream* new_stream_from_string(String*);
+Stream* new_stream_from_path(String);
+Stream* new_stream_from_string(String);
 char stream_next(Stream*);
+char stream_peek(Stream*);
 
 #endif

@@ -28,11 +28,11 @@ typedef enum {
   TOK_LAMBDA
 } TokenType;
 
-static const char *TOKEN_TYPE_STR[] = {
-    [TOK_EOF] = "<EOF>", [TOK_WS] = "<Whitespace>", [TOK_ERR] = "<Error>",
-    [TOK_ADD] = "+",     [TOK_SUB] = "-",           [TOK_MUL] = "*",
-    [TOK_QUO] = "/",     [TOK_MOD] = "%",           [TOK_LPAREN] = "(",
-    [TOK_RPAREN] = ")",  [TOK_LET] = "let",         [TOK_LAMBDA] = "lambda"};
+//static const char *TOKEN_TYPE_STR[] = {
+//    [TOK_EOF] = "<EOF>", [TOK_WS] = "<Whitespace>", [TOK_ERR] = "<Error>",
+//    [TOK_ADD] = "+",     [TOK_SUB] = "-",           [TOK_MUL] = "*",
+//    [TOK_QUO] = "/",     [TOK_MOD] = "%",           [TOK_LPAREN] = "(",
+//    [TOK_RPAREN] = ")",  [TOK_LET] = "let",         [TOK_LAMBDA] = "lambda"};
 
 typedef struct {
   size_t start;
@@ -42,11 +42,9 @@ typedef struct {
 typedef struct {
   TokenType type;
   char *lit;
-  // char* filepath;
-  // Span span;
 } Token;
 
-Token new_tok(TokenType, char*);
+Token *new_tok(TokenType, char*);
 
 #define START_TOK_SIZE 10000UL
 
@@ -58,7 +56,7 @@ typedef struct {
 } TokenStream;
 
 TokenStream *new_tok_stream();
-void tok_stream_push(TokenStream*, Token);
+void tok_stream_push(TokenStream*, Token*);
 Token* tok_stream_next(TokenStream*);
 Token* tok_stream_peek(TokenStream*);
 
