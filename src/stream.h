@@ -6,15 +6,16 @@
 #include <stdio.h>
 
 // A Stream is an abstraction over files and strings for source input
-typedef struct {
+typedef struct
+{
 	String path;
-	String src;	
+	String src;
 	size_t pos;
 } Stream;
 
-Stream* new_stream_from_path(String);
-Stream* new_stream_from_string(String);
-int stream_next(Stream*);
-int stream_peek(Stream*);
+Stream *new_stream_from_path(String);
+Stream *new_stream_from_string(String);
+int stream_next(Stream *);
+int stream_peek(Stream *);
 
 #endif

@@ -9,6 +9,6 @@
 #define MAX_NUM_CHARS 32
 #define MAX_IDENT_CHARS 255
 
-TokenStream *lex(Stream*);
+TokenStream *lex(Stream *);
 
 #endif

@@ -5,6 +5,6 @@
 #include <string.h>
 
 // A String is an immutable character array
-typedef char* String;
+typedef char *String;
 
 #endif
