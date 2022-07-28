@@ -12,9 +12,10 @@ int main() {
 	TokenStream *tokens = lex(stream);
 	while (true) {
 		Token *tok = malloc(sizeof(Token));
-		if ((tok = tok_stream_next(tokens))->type != TOK_EOF) {
+		tok = tok_stream_next(tokens);
+		if (tok->type != TOK_EOF) {
 			printf("Token { Type: Type, Lit: %s}", tok->lit);	
-			free(tok);
+			tok = NULL;
 		} else {
 			return 0;
 		}

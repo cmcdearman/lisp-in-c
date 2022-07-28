@@ -14,7 +14,7 @@ typedef struct {
 
 Stream* new_stream_from_path(String);
 Stream* new_stream_from_string(String);
-char stream_next(Stream*);
-char stream_peek(Stream*);
+int stream_next(Stream*);
+int stream_peek(Stream*);
 
 #endif

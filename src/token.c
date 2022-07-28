@@ -11,11 +11,12 @@ TokenStream *new_tok_stream() {
   stream->tokens = calloc(START_TOK_SIZE, sizeof(Token));
   stream->count = 0;
 	stream->pos = 0;
+	stream->size = START_TOK_SIZE;
   return stream;
 }
 
 void tok_stream_push(TokenStream *stream, Token *tok) {
-  if (stream->count >= stream->size) {
+  if (stream->count == stream->size) {
 		stream->size *= 2;
     stream->tokens = realloc(stream->tokens, stream->size * sizeof(Token));
   }

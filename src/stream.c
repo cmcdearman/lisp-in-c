@@ -27,13 +27,13 @@ Stream* new_stream_from_string(String src) {
 	return stream;
 }
 
-char stream_next(Stream *stream) {
+int stream_next(Stream *stream) {
 	if (strlen(stream->src) > stream->pos)
 		return stream->src[stream->pos++];
 	return EOF;
 }
 
-char stream_peek(Stream *stream) {
+int stream_peek(Stream *stream) {
 	if (strlen(stream->src) > stream->pos)
 		return stream->src[stream->pos];
 	return EOF;
