@@ -8,9 +8,9 @@
 // A Stream is an abstraction over files and strings for source input
 typedef struct
 {
-	String path;
-	String src;
-	size_t pos;
+  String path;
+  String src;
+  size_t pos;
 } Stream;
 
 Stream *new_stream_from_path(String);
