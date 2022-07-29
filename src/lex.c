@@ -19,37 +19,28 @@ TokenStream *lex(Stream *stream)
     {
     case '+':
       tok_stream_push(tok_stream, new_tok(TOK_ADD, "+"));
-      stream_next(stream);
       break;
     case '-':
       tok_stream_push(tok_stream, new_tok(TOK_SUB, "-"));
-      stream_next(stream);
       break;
     case '*':
       tok_stream_push(tok_stream, new_tok(TOK_MUL, "*"));
-      stream_next(stream);
       break;
     case '\\':
       tok_stream_push(tok_stream, new_tok(TOK_QUO, "\\"));
-      stream_next(stream);
       break;
     case '%':
       tok_stream_push(tok_stream, new_tok(TOK_MOD, "%"));
-      stream_next(stream);
       break;
     case '(':
       tok_stream_push(tok_stream, new_tok(TOK_LPAREN, "("));
-      stream_next(stream);
       break;
     case ')':
       tok_stream_push(tok_stream, new_tok(TOK_RPAREN, ")"));
-      stream_next(stream);
       break;
-    case '/':
-      if (stream_next(stream) == '/') {
+    case ';':
         while (stream_next(stream) != '\n')
-          continue;
-      }
+            continue;
     default:
       if (is_whitespace(c))
       {
@@ -67,6 +58,7 @@ TokenStream *lex(Stream *stream)
             break;
           }
           num_lit[i++] = c;
+          stream_next(stream);
         }
         if (!isdigit(num_lit[i - 1]))
         {
@@ -86,6 +78,7 @@ TokenStream *lex(Stream *stream)
             break;
           }
           ident[i++] = c;
+          stream_next(stream);
         }
         tok_stream_push(tok_stream, new_tok(TOK_IDENT, ident));
       }
@@ -93,7 +86,6 @@ TokenStream *lex(Stream *stream)
       {
         tok_stream_push(tok_stream, new_tok(TOK_ERR, "<Error>"));
       }
-      stream_next(stream);
       break;
     }
   }

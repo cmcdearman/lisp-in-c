@@ -1,3 +1,4 @@
 enigma
-run.sh
 obj/
+.vscode
+.idea
