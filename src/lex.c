@@ -39,8 +39,8 @@ TokenStream *lex(Stream *stream)
       tok_stream_push(tok_stream, new_tok(TOK_RPAREN, ")"));
       break;
     case ';':
-        while (stream_next(stream) != '\n')
-            continue;
+      while (stream_next(stream) != '\n')
+        continue;
     default:
       if (is_whitespace(c))
       {
