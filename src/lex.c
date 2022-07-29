@@ -57,8 +57,8 @@ TokenStream *lex(Stream *stream)
       }
       else if (isdigit(c))
       {
-        char *num_lit = calloc(MAX_NUM_CHARS, sizeof(char));
         int i = 0;
+        char *num_lit = calloc(MAX_NUM_CHARS, sizeof(char));
         while (isdigit(c) || c == '.')
         {
           if (i >= MAX_NUM_CHARS)
@@ -76,8 +76,8 @@ TokenStream *lex(Stream *stream)
       }
       else if (isalpha(c) || c == '_')
       {
-        char *ident = calloc(MAX_IDENT_CHARS, sizeof(char));
         int i = 0;
+        char *ident = calloc(MAX_IDENT_CHARS, sizeof(char));
         while (isalnum(c))
         {
           if (i >= MAX_IDENT_CHARS)
