@@ -13,7 +13,7 @@ bool is_keyword(String lit)
 TokenStream *lex(String src)
 {
   TokenStream *tok_stream = new_tok_stream();
-  for (int i = 0; i < strlen(src); i++)
+  for (size_t i = 0; i < strlen(src); i++)
   {
     char c = src[i];
     switch (c)
@@ -54,7 +54,7 @@ TokenStream *lex(String src)
       else if (isdigit(c))
       {
         char *num_lit = calloc(MAX_NUM_CHARS, sizeof(char));
-        int start = i;
+        size_t start = i;
         while (isdigit(c) || c == '.')
         {
           if (i - start >= MAX_NUM_CHARS)
@@ -78,7 +78,7 @@ TokenStream *lex(String src)
       }
       else if (isalpha(c) || c == '_')
       {
-        int start = i;
+        size_t start = i;
         char *ident = calloc(MAX_IDENT_CHARS, sizeof(char));
         while (isalnum(c))
         {
