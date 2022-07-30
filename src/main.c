@@ -2,6 +2,7 @@
 #include "token.h"
 #include "lex.h"
 #include "string.h"
+#include "parse.h"
 
 int main()
 {

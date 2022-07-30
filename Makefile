@@ -1,4 +1,3 @@
-CC     = gcc
 CFLAGS = -std=c99 -Wall -g -Wno-parentheses -Wno-unused-const-variable
 SRC    = $(wildcard src/*.c)
 OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
@@ -11,8 +10,10 @@ else
 endif
 
 ifeq ($(UNAME), Darwin)
+	CC = clang
 	GDB=lldb
 else
+	CC = gcc
 	GDB=gdb
 endif
 
