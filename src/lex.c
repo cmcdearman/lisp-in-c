@@ -13,6 +13,7 @@ bool is_keyword(String lit)
 TokenStream *lex(String src)
 {
   TokenStream *tok_stream = new_tok_stream();
+  tok_stream_push(tok_stream, new_tok(TOK_LPAREN, "(", 0, 0));
   for (size_t i = 0; i < strlen(src); i++)
   {
     char c = src[i];
@@ -117,6 +118,7 @@ TokenStream *lex(String src)
       break;
     }
   }
+  tok_stream_push(tok_stream, new_tok(TOK_RPAREN, ")", 0, 0));
   tok_stream_push(tok_stream, new_tok(TOK_EOF, "<Eof>", 0, 0));
   return tok_stream;
 }

@@ -3,9 +3,19 @@
 
 #include "string.h"
 
+typedef enum {
+  OBJ_NUMBER,
+  OBJ_STRING,
+  OBJ_SYMBOL,
+  OBJ_CONS,
+  OBJ_FN,
+  OBJ_ENV
+} ObjectType;
+
 struct Object;
 
 typedef struct Object {
+  ObjectType type;
   union {
     union {
       struct { double num; } Num;
@@ -17,5 +27,8 @@ typedef struct Object {
     struct { struct Object *vars, *up; } Env;
   };
 } Object;
+
+void print_object(Object *);
+void debug_print_object(Object *);
 
 #endif
