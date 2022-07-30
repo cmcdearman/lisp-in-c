@@ -34,13 +34,16 @@ typedef struct
   size_t end;
 } Span;
 
+Span *new_span(size_t start, size_t end);
+
 typedef struct
 {
   TokenType type;
   char *lit;
+  Span *span;
 } Token;
 
-Token *new_tok(TokenType, char *);
+Token *new_tok(TokenType, char *, size_t, size_t);
 String tok_type_to_str(TokenType type);
 
 #define START_TOK_SIZE 10000UL

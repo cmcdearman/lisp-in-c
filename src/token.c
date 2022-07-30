@@ -1,10 +1,19 @@
 #include "token.h"
 
-Token *new_tok(TokenType type, char *lit)
+Span *new_span(size_t start, size_t end)
+{
+  Span *span = malloc(sizeof(Span*));
+  span->start = start;
+  span->end = end;
+  return span;
+}
+
+Token *new_tok(TokenType type, char *lit, size_t start, size_t end)
 {
   Token *tok = malloc(sizeof(Token));
   tok->type = type;
   tok->lit = lit;
+  tok->span = new_span(start, end);
   return tok;
 }
 
@@ -66,12 +75,12 @@ Token *tok_stream_next(TokenStream *stream)
 {
   if (stream->size >= stream->pos)
     return &stream->tokens[stream->pos++];
-  return new_tok(TOK_EOF, "<Eof>");
+  return new_tok(TOK_EOF, "<Eof>", 0, 0);
 }
 
 Token *tok_stream_peek(TokenStream *stream)
 {
   if (stream->size >= stream->pos)
     return &stream->tokens[stream->pos];
-  return new_tok(TOK_EOF, "<Eof>");
+  return new_tok(TOK_EOF, "<Eof>", 0, 0);
 }

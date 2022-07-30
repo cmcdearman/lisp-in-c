@@ -10,10 +10,10 @@ else
 endif
 
 ifeq ($(UNAME), Darwin)
-	CC = clang
+	CC=clang
 	GDB=lldb
 else
-	CC = gcc
+	CC=gcc
 	GDB=gdb
 endif
 
