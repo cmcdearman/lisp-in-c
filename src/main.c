@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include "stream.h"
 #include "token.h"
 #include "lex.h"
+#include "string.h"
 
 int main()
 {
-  Stream *stream = new_stream_from_path("examples/simple.egl");
-  TokenStream *tokens = lex(stream);
+  String src = string_from_file("examples/simple.egl");
+  TokenStream *tokens = lex(src);
   while (true)
   {
     Token *tok = tok_stream_next(tokens);
