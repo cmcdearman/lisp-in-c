@@ -4,13 +4,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "string.h"
 
 typedef enum
 {
   TOK_EOF,
-  TOK_WS,
   TOK_ERR,
-  TOK_COMMENT,
 
   TOK_IDENT,
   TOK_NUMBER,
@@ -29,12 +28,6 @@ typedef enum
   TOK_LAMBDA
 } TokenType;
 
-// static const char *TOKEN_TYPE_STR[] = {
-//     [TOK_EOF] = "<EOF>", [TOK_WS] = "<Whitespace>", [TOK_ERR] = "<Error>",
-//     [TOK_ADD] = "+",     [TOK_SUB] = "-",           [TOK_MUL] = "*",
-//     [TOK_QUO] = "/",     [TOK_MOD] = "%",           [TOK_LPAREN] = "(",
-//     [TOK_RPAREN] = ")",  [TOK_LET] = "let",         [TOK_LAMBDA] = "lambda"};
-
 typedef struct
 {
   size_t start;
@@ -48,6 +41,7 @@ typedef struct
 } Token;
 
 Token *new_tok(TokenType, char *);
+String tok_type_to_str(TokenType type);
 
 #define START_TOK_SIZE 10000UL
 

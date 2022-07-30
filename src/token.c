@@ -7,6 +7,41 @@ Token *new_tok(TokenType type, char *lit)
   tok->lit = lit;
   return tok;
 }
+
+String tok_type_to_str(TokenType type)
+{
+  switch (type) {
+  case TOK_EOF:
+    return "EOF";
+  case TOK_ERR:
+    return "Error";
+  case TOK_IDENT:
+    return "Ident";
+  case TOK_NUMBER:
+    return "Number";
+  case TOK_STRING:
+    return "String";
+  case TOK_ADD:
+    return "+";
+  case TOK_SUB:
+    return "-";
+  case TOK_MUL:
+    return "*";
+  case TOK_QUO:
+    return "/";
+  case TOK_MOD:
+    return "%";
+  case TOK_LPAREN:
+    return "(";
+  case TOK_RPAREN:
+    return ")";
+  case TOK_LET:
+    return "let";
+  case TOK_LAMBDA:
+    return "lambda";
+  }
+}
+
 TokenStream *new_tok_stream()
 {
   TokenStream *stream = calloc(1, sizeof(TokenStream));

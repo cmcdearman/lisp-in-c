@@ -14,7 +14,7 @@ String string_from_file(String path)
     fprintf(stderr, "Error: could not seek to end of file\n"), exit(1);
   if (fseek(file, 0, SEEK_SET) == -1)
     fprintf(stderr, "Error: could not check file length\n"), exit(1);
-  if (!(buf = (char *) malloc(len+1)))
+  if (!(buf = (char *)malloc(len + 1)))
     fprintf(stderr, "Error: could not allocate string memory\n"), exit(1);
   if (!fread(buf, 1, len, file))
     fprintf(stderr, "Error: could not read from file\n"), exit(1);

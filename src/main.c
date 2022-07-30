@@ -12,7 +12,7 @@ int main()
     Token *tok = tok_stream_next(tokens);
     if (tok->type != TOK_EOF)
     {
-      printf("Token { Type: Type, Lit: %s}\n", tok->lit);
+      printf("Token { Type: %s, Lit: %s}\n", tok_type_to_str(tok->type), tok->lit);
       tok = NULL;
     }
     else
