@@ -34,7 +34,6 @@ TokenStream *lex(String src)
       tok_stream_push(tok_stream, new_tok(TOK_MOD, "%", i, i + 1));
       break;
     case '(':
-      printf("Lparen: %d, %c\n", i, src[i]);
       tok_stream_push(tok_stream, new_tok(TOK_LPAREN, "(", i, i + 1));
       break;
     case ')':

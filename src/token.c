@@ -50,6 +50,7 @@ String tok_type_to_str(TokenType type)
   case TOK_LAMBDA:
     return "lambda";
   }
+  return "";
 }
 
 TokenStream *new_tok_stream()
