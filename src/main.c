@@ -9,17 +9,14 @@ int main()
   TokenStream *tokens = lex(stream);
   while (true)
   {
-    Token *tok = malloc(sizeof(Token));
-    tok = tok_stream_next(tokens);
+    Token *tok = tok_stream_next(tokens);
     if (tok->type != TOK_EOF)
     {
-      printf("Token { Type: Type, Lit: %s}", tok->lit);
+      printf("Token { Type: Type, Lit: %s}\n", tok->lit);
       tok = NULL;
     }
     else
-    {
-      return 0;
-    }
+      break;
   }
   return 0;
 }
