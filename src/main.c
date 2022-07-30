@@ -18,8 +18,7 @@ int main()
           tok_type_to_str(tok->type),
           tok->lit,
           tok->span->start,
-          tok->span->end
-          );
+          tok->span->end);
       tok = NULL;
     }
     else

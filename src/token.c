@@ -2,7 +2,7 @@
 
 Span *new_span(size_t start, size_t end)
 {
-  Span *span = malloc(sizeof(Span*));
+  Span *span = malloc(sizeof(Span *));
   span->start = start;
   span->end = end;
   return span;
@@ -19,7 +19,8 @@ Token *new_tok(TokenType type, char *lit, size_t start, size_t end)
 
 String tok_type_to_str(TokenType type)
 {
-  switch (type) {
+  switch (type)
+  {
   case TOK_EOF:
     return "EOF";
   case TOK_ERR:

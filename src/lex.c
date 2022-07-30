@@ -19,26 +19,26 @@ TokenStream *lex(String src)
     switch (c)
     {
     case '+':
-      tok_stream_push(tok_stream, new_tok(TOK_ADD, "+", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_ADD, "+", i, i + 1));
       break;
     case '-':
-      tok_stream_push(tok_stream, new_tok(TOK_SUB, "-", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_SUB, "-", i, i + 1));
       break;
     case '*':
-      tok_stream_push(tok_stream, new_tok(TOK_MUL, "*", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_MUL, "*", i, i + 1));
       break;
     case '/':
-      tok_stream_push(tok_stream, new_tok(TOK_QUO, "/", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_QUO, "/", i, i + 1));
       break;
     case '%':
-      tok_stream_push(tok_stream, new_tok(TOK_MOD, "%", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_MOD, "%", i, i + 1));
       break;
     case '(':
       printf("Lparen: %d, %c\n", i, src[i]);
-      tok_stream_push(tok_stream, new_tok(TOK_LPAREN, "(", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_LPAREN, "(", i, i + 1));
       break;
     case ')':
-      tok_stream_push(tok_stream, new_tok(TOK_RPAREN, ")", i, i+1));
+      tok_stream_push(tok_stream, new_tok(TOK_RPAREN, ")", i, i + 1));
       break;
     case ';':
       while (src[i] != '\n')
@@ -61,7 +61,7 @@ TokenStream *lex(String src)
           if (i - start >= MAX_NUM_CHARS)
           {
             tok_stream_push(tok_stream,
-                            new_tok(TOK_ERR, "<Error>", i-strlen(num_lit), i));
+                            new_tok(TOK_ERR, "<Error>", i - strlen(num_lit), i));
             break;
           }
           num_lit[i++ - start] = c;
@@ -70,11 +70,11 @@ TokenStream *lex(String src)
         if (!isdigit(num_lit[i - start - 1]))
         {
           tok_stream_push(tok_stream,
-                          new_tok(TOK_ERR, "<Error>", i-strlen(num_lit), i));
+                          new_tok(TOK_ERR, "<Error>", i - strlen(num_lit), i));
           continue;
         }
         tok_stream_push(tok_stream,
-                        new_tok(TOK_NUMBER, num_lit, i- strlen(num_lit), i));
+                        new_tok(TOK_NUMBER, num_lit, i - strlen(num_lit), i));
         i--;
       }
       else if (isalpha(c) || c == '_')
@@ -86,7 +86,7 @@ TokenStream *lex(String src)
           if (i - start >= MAX_IDENT_CHARS)
           {
             tok_stream_push(tok_stream,
-                            new_tok(TOK_ERR, "<Error>", i- strlen(ident), i));
+                            new_tok(TOK_ERR, "<Error>", i - strlen(ident), i));
             break;
           }
           ident[i++ - start] = c;
@@ -96,17 +96,17 @@ TokenStream *lex(String src)
         {
           if (strcmp("let", ident) == 0)
             tok_stream_push(tok_stream,
-                            new_tok(TOK_LET, "let", i- strlen(ident), i));
+                            new_tok(TOK_LET, "let", i - strlen(ident), i));
           else if (strcmp("lambda", ident) == 0)
             tok_stream_push(tok_stream,
-                            new_tok(TOK_LAMBDA, "lambda", i-strlen(ident), i));
+                            new_tok(TOK_LAMBDA, "lambda", i - strlen(ident), i));
           else
             tok_stream_push(tok_stream,
-                            new_tok(TOK_ERR, "<Error>", i-strlen(ident), i));
+                            new_tok(TOK_ERR, "<Error>", i - strlen(ident), i));
         }
         else
         {
-          tok_stream_push(tok_stream, new_tok(TOK_IDENT, ident, i-strlen(ident), i));
+          tok_stream_push(tok_stream, new_tok(TOK_IDENT, ident, i - strlen(ident), i));
         }
         i--;
       }
