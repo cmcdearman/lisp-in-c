@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include "string.h"
+#include "util.h"
 
 typedef enum {
   OBJ_NUMBER,

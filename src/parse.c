@@ -38,7 +38,7 @@ Object *parse_atom(TokenStream *stream) {
 }
 
 Object *parse_list(TokenStream *stream) {
-  Object *cons = malloc(sizeof(Object*));
+  Object *cons = malloc(sizeof(Object));
   Object *car = parse(stream);
   Object *cdr;
   cons->type = OBJ_CONS;

@@ -2,7 +2,7 @@
 
 Span *new_span(size_t start, size_t end)
 {
-  Span *span = malloc(sizeof(Span *));
+  Span *span = malloc(sizeof(Span));
   span->start = start;
   span->end = end;
   return span;
@@ -75,14 +75,14 @@ void tok_stream_push(TokenStream *stream, Token *tok)
 
 Token *tok_stream_next(TokenStream *stream)
 {
-  if (stream->size >= stream->pos)
+  if (stream->size > stream->pos)
     return &stream->tokens[stream->pos++];
   return new_tok(TOK_EOF, "<Eof>", 0, 0);
 }
 
 Token *tok_stream_peek(TokenStream *stream)
 {
-  if (stream->size >= stream->pos)
+  if (stream->size > stream->pos)
     return &stream->tokens[stream->pos];
   return new_tok(TOK_EOF, "<Eof>", 0, 0);
 }
