@@ -6,7 +6,7 @@
 
 int main()
 {
-  String src = string_from_file("examples/simple.egl");
+  String src = string_from_file("examples/deadSimple.egl");
   TokenStream *tokens = lex(src);
 //  while (true)
 //  {
@@ -25,6 +25,6 @@ int main()
 //      break;
 //  }
   Object *ast = parse(tokens);
-  print_object(ast);
+  json_print_object(ast);
   return 0;
 }

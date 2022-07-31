@@ -4,7 +4,7 @@ void print_object(Object *obj) {
   while (obj != NULL) {
     switch (obj->type) {
     case OBJ_NUMBER:
-      printf("%f", obj->Atom.Num.num);
+      printf("%.1f", obj->Atom.Num.num);
       obj = obj->Cons.cdr;
       break;
     case OBJ_STRING:
@@ -34,23 +34,53 @@ void debug_print_object(Object *obj) {
   while (obj != NULL) {
     switch (obj->type) {
     case OBJ_NUMBER:
-      printf("Sexpr::Atom::Literal::Number(%ld)", obj->Atom.Num.num);
+      printf("Atom(Number(%f))", obj->Atom.Num.num);
       obj = obj->Cons.cdr;
       break;
     case OBJ_STRING:
-      printf("Sexpr::Atom::Literal::String(%s)", obj->Atom.String.str);
+      printf("Atom(String(%s))", obj->Atom.String.str);
       obj = obj->Cons.cdr;
       break;
     case OBJ_SYMBOL:
-      printf("Sexpr::Atom::Literal::Symbol(%s)", obj->Atom.Symbol.sym);
+      printf("Atom(Symbol(%s))", obj->Atom.Symbol.sym);
       obj = obj->Cons.cdr;
       break;
     case OBJ_CONS:
-      printf("Sexpr::Cons { car: ");
-      print_object(obj->Cons.car);
+      printf("Cons { car: ");
+      debug_print_object(obj->Cons.car);
       printf(", cdr: ");
-      print_object(obj->Cons.cdr);
+      debug_print_object(obj->Cons.cdr);
       printf(" }");
+      obj = obj->Cons.cdr;
+      break;
+    default:
+      fprintf(stderr, "unknown object");
+      exit(1);
+    }
+  }
+}
+
+void json_print_object(Object *obj) {
+  while (obj != NULL) {
+    switch (obj->type) {
+    case OBJ_NUMBER:
+      printf("%f", obj->Atom.Num.num);
+      obj = obj->Cons.cdr;
+      break;
+    case OBJ_STRING:
+      printf("%s", obj->Atom.String.str);
+      obj = obj->Cons.cdr;
+      break;
+    case OBJ_SYMBOL:
+      printf("%s", obj->Atom.Symbol.sym);
+      obj = obj->Cons.cdr;
+      break;
+    case OBJ_CONS:
+      printf("{\n\t\"car\": ");
+      json_print_object(obj->Cons.car);
+      printf(",\n\"cdr\": ");
+      json_print_object(obj->Cons.cdr);
+      printf("\n}");
       obj = obj->Cons.cdr;
       break;
     default:

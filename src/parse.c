@@ -40,7 +40,7 @@ Object *parse_atom(TokenStream *stream) {
 Object *parse_list(TokenStream *stream) {
   Object *cons = malloc(sizeof(Object*));
   Object *car = parse(stream);
-  Object *cdr = malloc(sizeof(Object*));
+  Object *cdr;
   cons->type = OBJ_CONS;
 
   if (tok_stream_peek(stream)->type == TOK_RPAREN) {
