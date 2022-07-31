@@ -6,7 +6,7 @@
 
 int main()
 {
-  String src = string_from_file("examples/deadSimple.egl");
+  String src = string_from_file("examples/simple.egl");
   TokenStream *tokens = lex(src);
 //  while (true)
 //  {
