@@ -1,11 +1,8 @@
-#include <stdio.h>
-#include "token.h"
 #include "lex.h"
-#include "string.h"
 #include "parse.h"
 
 int main()
 {
-  print_object(parse(lex(string_from_file("examples/deadSimple.egl"))));
+  print_object(parse(lex("(- 1 (% 5 2)) ; 0")));
   return 0;
 }
