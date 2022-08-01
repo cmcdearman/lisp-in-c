@@ -4,6 +4,6 @@
 #include "object.h"
 #include "token.h"
 
-Object *parse(TokenStream *stream);
+Object *parse(TokenStream *);
 
 #endif

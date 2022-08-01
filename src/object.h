@@ -29,6 +29,8 @@ typedef struct Object {
   };
 } Object;
 
+Object *cons(Object *, Object *);
+
 void print_object(Object *);
 void debug_print_object(Object *);
 void json_print_object(Object *);

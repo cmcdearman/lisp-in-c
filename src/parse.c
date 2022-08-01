@@ -32,26 +32,27 @@ Object *parse_atom(TokenStream *stream) {
     atom->type = OBJ_SYMBOL;
     return atom;
   default:
-    fprintf(stderr, "Unknown token");
+    Token *tok = tok_stream_peek(stream);
+    fprintf(
+        stderr,
+        "Error: unknown Token { Type: %s, Lit: %s } - <%zu, %zu>\n",
+        tok_type_to_str(tok->type),
+        tok->lit,
+        tok->span->start,
+        tok->span->end);
     exit(1);
   }
 }
 
 Object *parse_list(TokenStream *stream) {
-  Object *cons = malloc(sizeof(Object));
-  Object *car = parse(stream);
-  Object *cdr;
-  cons->type = OBJ_CONS;
-
-  if (tok_stream_peek(stream)->type == TOK_RPAREN) {
-    tok_stream_next(stream);
-    cdr = NULL;
-  } else {
-    cdr = parse_list(stream);
+  Object *list = NULL;
+  Object **tail = &list;
+  while (tok_stream_peek(stream)->type != TOK_RPAREN) {
+    Object *car = parse(stream);
+    *tail = cons(car, *tail);
+    tail = &(*tail)->Cons.cdr;
   }
-  cons->Cons.car = car;
-  cons->Cons.cdr = cdr;
-  return cons;
+  return list;
 }
 
 Object *parse(TokenStream *stream) {

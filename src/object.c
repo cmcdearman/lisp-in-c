@@ -1,5 +1,13 @@
 #include "object.h"
 
+Object *cons(Object *car, Object *cdr) {
+  Object *cons = malloc(sizeof(Object));
+  cons->type = OBJ_CONS;
+  cons->Cons.car = car;
+  cons->Cons.cdr = cdr;
+  return cons;
+}
+
 void print_object(Object *obj) {
   switch (obj->type) {
   case OBJ_NUMBER:

@@ -6,8 +6,7 @@
 
 int main()
 {
-  String src = string_from_file("examples/simple.egl");
-  TokenStream *tokens = lex(src);
+  TokenStream *tokens = lex(string_from_file("examples/deadSimple.egl"));
 //  while (true)
 //  {
 //    Token *tok = tok_stream_next(tokens);
@@ -24,7 +23,11 @@ int main()
 //    else
 //      break;
 //  }
-  Object *ast = parse(tokens);
-  json_print_object(ast);
+  while (tok_stream_peek(tokens)->type != TOK_EOF) {
+    Object *ast = parse(tokens);
+    print_object(ast);
+    printf("\n");
+    tok_stream_next(tokens);
+  }
   return 0;
 }
