@@ -53,6 +53,16 @@ String tok_type_to_str(TokenType type)
   return "";
 }
 
+void print_token(Token *tok) {
+  printf(
+      "Token { Type: %s, Lit: %s } - <%zu, %zu>\n",
+      tok_type_to_str(tok->type),
+      tok->lit,
+      tok->span->start,
+      tok->span->end
+      );
+}
+
 TokenStream *new_tok_stream()
 {
   TokenStream *stream = calloc(1, sizeof(TokenStream));
@@ -85,4 +95,14 @@ Token *tok_stream_peek(TokenStream *stream)
   if (stream->size > stream->pos)
     return &stream->tokens[stream->pos];
   return new_tok(TOK_EOF, "<Eof>", 0, 0);
+}
+
+void print_tok_stream(TokenStream *stream) {
+  while (true) {
+    Token *tok = tok_stream_next(stream);
+    if (tok->type != TOK_EOF) {
+      print_token(tok);
+    } else
+      break;
+  }
 }

@@ -2,6 +2,7 @@
 #define TOKEN_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
 #include "string.h"
@@ -45,6 +46,7 @@ typedef struct
 
 Token *new_tok(TokenType, char *, size_t, size_t);
 String tok_type_to_str(TokenType type);
+void print_token(Token *);
 
 #define START_TOK_SIZE 10000UL
 
@@ -60,5 +62,6 @@ TokenStream *new_tok_stream();
 void tok_stream_push(TokenStream *, Token *);
 Token *tok_stream_next(TokenStream *);
 Token *tok_stream_peek(TokenStream *);
+void print_tok_stream(TokenStream *);
 
 #endif
