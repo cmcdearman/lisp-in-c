@@ -22,7 +22,7 @@ void print_object(Object *obj) {
   case OBJ_CONS:
     printf("(");
     print_object(obj->Cons.car);
-    printf(",");
+    printf(" . ");
     if (!obj->Cons.cdr) {
       printf("null");
       printf(")");

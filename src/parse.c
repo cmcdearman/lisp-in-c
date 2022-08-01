@@ -53,6 +53,21 @@ Object *parse_list(TokenStream *stream) {
     tail = &(*tail)->Cons.cdr;
   }
   return list;
+
+  Object *cons = malloc(sizeof(Object));
+  Object *car = parse(stream);
+  Object *cdr;
+  cons->type = OBJ_CONS;
+
+  if (tok_stream_peek(stream)->type == TOK_RPAREN) {
+    tok_stream_next(stream);
+    cdr = NULL;
+  } else {
+    cdr = parse_list(stream);
+  }
+  cons->Cons.car = car;
+  cons->Cons.cdr = cdr;
+  return cons;
 }
 
 Object *parse(TokenStream *stream) {
@@ -60,6 +75,9 @@ Object *parse(TokenStream *stream) {
   case TOK_LPAREN:
     tok_stream_next(stream);
     return parse_list(stream);
+  case TOK_RPAREN:
+    tok_stream_next(stream);
+    break;
   default:
     return parse_atom(stream);
   }

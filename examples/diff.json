@@ -1,0 +1,46 @@
+{
+    "car": "+",
+    "cdr": {
+        "car": {
+            "car": "/",
+            "cdr": {
+                "car": 6.0,
+                "cdr": {
+                    "car": {
+                        "car": "*",
+                        "cdr": {
+                            "car": 1.5,
+                            "cdr": {
+                                "car": 2.0,
+                                "cdr": null
+                            }
+                        }
+                    },
+                    "cdr": null
+                }
+            }
+        },
+        "cdr": {
+            "car": {
+                "car": "-",
+                "cdr": {
+                    "car": 1.0,
+                    "cdr": {
+                        "car": {
+                            "car": "%",
+                            "cdr": {
+                                "car": 5.0,
+                                "cdr": {
+                                    "car": 2.0,
+                                    "cdr": null
+                                }
+                            }
+                        },
+                        "cdr": null
+                    }
+                }
+            },
+            "cdr": null
+        }
+    }
+}
