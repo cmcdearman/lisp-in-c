@@ -60,8 +60,6 @@ Object *parse(TokenStream *stream) {
   case TOK_LPAREN:
     tok_stream_next(stream);
     return parse_list(stream);
-  case TOK_RPAREN:
-    tok_stream_next(stream);
   default:
     return parse_atom(stream);
   }
