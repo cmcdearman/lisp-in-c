@@ -1,6 +1,7 @@
 #include "object.h"
 
-Object *cons(Object *car, Object *cdr) {
+Object *cons(Object *car, Object *cdr)
+{
   Object *cons = malloc(sizeof(Object));
   cons->type = OBJ_CONS;
   cons->Cons.car = car;
@@ -8,8 +9,10 @@ Object *cons(Object *car, Object *cdr) {
   return cons;
 }
 
-void print_object(Object *obj) {
-  switch (obj->type) {
+void print_object(Object *obj)
+{
+  switch (obj->type)
+  {
   case OBJ_NUMBER:
     printf("%.1f", obj->Atom.Num.num);
     return;
@@ -23,7 +26,8 @@ void print_object(Object *obj) {
     printf("(");
     print_object(obj->Cons.car);
     printf(" . ");
-    if (!obj->Cons.cdr) {
+    if (!obj->Cons.cdr)
+    {
       printf("null");
       printf(")");
       return;
@@ -37,8 +41,10 @@ void print_object(Object *obj) {
   }
 }
 
-void debug_print_object(Object *obj) {
-  switch (obj->type) {
+void debug_print_object(Object *obj)
+{
+  switch (obj->type)
+  {
   case OBJ_NUMBER:
     printf("Atom(Number(%.1f))", obj->Atom.Num.num);
     return;
@@ -52,7 +58,8 @@ void debug_print_object(Object *obj) {
     printf("Cons { car: ");
     debug_print_object(obj->Cons.car);
     printf(", cdr: ");
-    if (!obj->Cons.cdr) {
+    if (!obj->Cons.cdr)
+    {
       printf("null");
       printf(" }");
       return;
@@ -66,8 +73,10 @@ void debug_print_object(Object *obj) {
   }
 }
 
-void json_print_object(Object *obj) {
-  switch (obj->type) {
+void json_print_object(Object *obj)
+{
+  switch (obj->type)
+  {
   case OBJ_NUMBER:
     printf("%.1f", obj->Atom.Num.num);
     return;
@@ -81,7 +90,8 @@ void json_print_object(Object *obj) {
     printf("{\"car\": ");
     json_print_object(obj->Cons.car);
     printf(",\"cdr\": ");
-    if (!obj->Cons.cdr) {
+    if (!obj->Cons.cdr)
+    {
       printf("null");
       printf("}");
       return;
