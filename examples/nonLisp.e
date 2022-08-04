@@ -1,4 +1,4 @@
-import std.io;
+import std::{io, ops};
 
 fn main() {
   println("Hello, world!");
@@ -10,15 +10,31 @@ fn add(a, b: f64) -> f64 {
 
 struct Vector<T> {
   arr: []T,
-  size: usize
+  size: usize,
+  pos: usize
 }
 
 impl Vector<T> {
   fn Vector<T>() -> Self {
-    return Self { arr: [], size: 0 };
+    return Self { arr: T[], size: 0 };
   }
 
-  fn append(*self) -> Result(Ok, Err) {
+  fn append(self, item: T) {
+    if self.pos >= self.usize {
+      self.size *= 2;
+      var tmp [size]T;
+      memcpy(tmp, self.arr, size / 2);
+    }
+    self.arr[self.pos++] = item;
+  }
+}
+
+struct String {
+  str: []char
+}
+
+impl Add<String> for String {
+  fn add(self, rhs: String) -> String {
 
   }
 }
