@@ -1,1 +1,1 @@
-make clean && make && ./enigma
+make clean && make && ./enigma-lisp

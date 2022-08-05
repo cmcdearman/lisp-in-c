@@ -2,9 +2,9 @@
 #define OBJECT_H
 
 #include "string.h"
-#include "util.h"
 
-typedef enum {
+typedef enum
+{
   OBJ_NUMBER,
   OBJ_STRING,
   OBJ_SYMBOL,
@@ -15,7 +15,8 @@ typedef enum {
 
 struct Object;
 
-typedef struct Object {
+typedef struct Object
+{
   ObjectType type;
   union {
     union {
@@ -30,6 +31,8 @@ typedef struct Object {
 } Object;
 
 Object *cons(Object *, Object *);
+Object *env_find(Object *, Object *);
+void traverse(Object *, void *(fn) (Object *));
 
 void print_object(Object *);
 void debug_print_object(Object *);
