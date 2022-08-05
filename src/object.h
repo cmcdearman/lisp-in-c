@@ -18,39 +18,21 @@ struct Object;
 typedef struct Object
 {
   ObjectType type;
-  union
-  {
-    union
-    {
-      struct
-      {
-        double num;
-      } Num;
-      struct
-      {
-        String str;
-      } String;
-      struct
-      {
-        String sym;
-      } Symbol;
+  union {
+    union {
+      struct { double num; } Num;
+      struct { String str; } String;
+      struct { String sym; } Symbol;
     } Atom;
-    struct
-    {
-      struct Object *car, *cdr;
-    } Cons;
-    struct
-    {
-      struct Object *params, *body, *env;
-    } Fn;
-    struct
-    {
-      struct Object *vars, *up;
-    } Env;
+    struct { struct Object *car, *cdr; } Cons;
+    struct { struct Object *params, *body, *env; } Fn;
+    struct { struct Object *vars, *up; } Env;
   };
 } Object;
 
 Object *cons(Object *, Object *);
+Object *env_find(Object *, Object *);
+void traverse(Object *, void *(fn) (Object *));
 
 void print_object(Object *);
 void debug_print_object(Object *);

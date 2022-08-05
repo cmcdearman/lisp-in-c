@@ -15,7 +15,7 @@ struct Vector<T> {
 }
 
 impl Vector<T> {
-  fn Vector<T>() -> Self {
+  fn new<T>() -> Self {
     return Self { arr: T[], size: 0 };
   }
 
@@ -35,7 +35,7 @@ struct String {
 
 impl Add<String> for String {
   fn add(self, rhs: String) -> String {
-
+    
   }
 }
 

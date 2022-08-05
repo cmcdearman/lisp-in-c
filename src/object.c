@@ -9,6 +9,17 @@ Object *cons(Object *car, Object *cdr)
   return cons;
 }
 
+Object *env_find(Object *env, Object *sym) {
+  return NULL;
+}
+
+void traverse(Object *head, void *(fn) (Object *)) {
+  while (head != NULL) {
+    fn(head);
+    head = head->Cons.cdr;
+  }
+}
+
 void print_object(Object *obj)
 {
   switch (obj->type)
