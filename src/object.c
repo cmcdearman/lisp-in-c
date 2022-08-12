@@ -9,15 +9,23 @@ Object *cons(Object *car, Object *cdr)
   return cons;
 }
 
-Object *env_find(Object *env, Object *sym) {
+Object *env_find(Object *env, Object *sym)
+{
   return NULL;
 }
 
-void traverse(Object *head, void *(fn) (Object *)) {
-  while (head != NULL) {
-    fn(head);
-    head = head->Cons.cdr;
-  }
+//Object *map(Object *list, void *(fn)(Object *))
+//{
+//  switch (list->type)
+//  {
+//  case OBJ_CONS:
+//    return cons(fn(list->Cons.car), map(list->Cons.cdr, fn));
+//  }
+//}
+
+void obj_free(Object *obj) {
+  free(obj);
+  obj = NULL;
 }
 
 void print_object(Object *obj)

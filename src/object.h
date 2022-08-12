@@ -10,7 +10,8 @@ typedef enum
   OBJ_SYMBOL,
   OBJ_CONS,
   OBJ_FN,
-  OBJ_ENV
+  OBJ_ENV,
+	OBJ_NIL
 } ObjectType;
 
 struct Object;
@@ -32,7 +33,8 @@ typedef struct Object
 
 Object *cons(Object *, Object *);
 Object *env_find(Object *, Object *);
-void traverse(Object *, void *(fn) (Object *));
+//Object *map(Object *, void *(fn) (Object *));
+void obj_free(Object *);
 
 void print_object(Object *);
 void debug_print_object(Object *);

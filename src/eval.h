@@ -3,6 +3,6 @@
 
 #include "object.h"
 
-Object *eval(Object *, Object *);
+// Object *eval(Object *, Object *);
 
 #endif

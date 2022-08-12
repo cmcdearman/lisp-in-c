@@ -1,4 +1,5 @@
 #include "parse.h"
+#include "token.h"
 
 Object *parse(TokenStream *stream)
 {
@@ -60,4 +61,5 @@ Object *parse(TokenStream *stream)
       exit(1);
     }
   }
+  tok_stream_free(stream);
 }

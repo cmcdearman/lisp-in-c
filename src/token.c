@@ -8,6 +8,11 @@ Span *new_span(size_t start, size_t end)
   return span;
 }
 
+void span_free(Span *span) {
+  free(span);
+  span = NULL;
+}
+
 Token *new_tok(TokenType type, char *lit, size_t start, size_t end)
 {
   Token *tok = malloc(sizeof(Token));
@@ -15,6 +20,12 @@ Token *new_tok(TokenType type, char *lit, size_t start, size_t end)
   tok->lit = lit;
   tok->span = new_span(start, end);
   return tok;
+}
+
+void tok_free(Token *tok) {
+  span_free(tok->span);
+  free(tok);
+  tok = NULL;
 }
 
 String tok_type_to_str(TokenType type)
@@ -73,12 +84,26 @@ TokenStream *new_tok_stream()
   return stream;
 }
 
+void tok_stream_free(TokenStream *stream) {
+  for (size_t i = 0; i < stream->count; i++) {
+    tok_free(&stream->tokens[i]);
+  }
+  free(stream);
+  stream = NULL;
+}
+
 void tok_stream_push(TokenStream *stream, Token *tok)
 {
   if (stream->count == stream->size)
   {
+    Token *tmp;
     stream->size *= 2;
-    stream->tokens = realloc(stream->tokens, stream->size * sizeof(Token));
+    tmp = realloc(stream->tokens, stream->size * sizeof(Token));
+    if (!tmp) {
+      fprintf(stderr, "error: out of usable virtual memory");
+      exit(1);
+    }
+    stream->tokens = tmp;
   }
   stream->tokens[stream->count++] = *tok;
 }
