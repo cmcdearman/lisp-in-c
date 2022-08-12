@@ -9,5 +9,6 @@
 typedef char *String;
 
 String string_from_file(String);
+String string_cat(String, String);
 
 #endif
