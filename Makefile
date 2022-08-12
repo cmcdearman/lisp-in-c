@@ -4,9 +4,9 @@ OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
 UNAME  = $(shell uname)
 
 ifeq ($(OS),Windows_NT)
-	BIN=enigma-lisp.exe
+	BIN=lisp-in-c.exe
 else
-	BIN=enigma-lisp
+	BIN=lisp-in-c
 endif
 
 ifeq ($(UNAME), Darwin)
