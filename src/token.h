@@ -36,6 +36,7 @@ typedef struct
 } Span;
 
 Span *new_span(size_t start, size_t end);
+void span_free(Span *);
 
 typedef struct
 {
@@ -45,6 +46,7 @@ typedef struct
 } Token;
 
 Token *new_tok(TokenType, char *, size_t, size_t);
+void tok_free(Token *);
 String tok_type_to_str(TokenType type);
 void print_token(Token *);
 
@@ -59,6 +61,7 @@ typedef struct
 } TokenStream;
 
 TokenStream *new_tok_stream();
+void tok_stream_free(TokenStream *);
 void tok_stream_push(TokenStream *, Token *);
 Token *tok_stream_next(TokenStream *);
 Token *tok_stream_peek(TokenStream *);
