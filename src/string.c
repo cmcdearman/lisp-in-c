@@ -23,3 +23,10 @@ String string_from_file(String path)
 
   return buf;
 }
+
+String string_cat(String str1, String str2) {
+  char *str = malloc((strlen(str1) + strlen(str2)) * sizeof(char));
+  strcpy(str, str1);
+  strcat(str, str2);
+  return str;
+}
