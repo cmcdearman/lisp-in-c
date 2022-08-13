@@ -18,6 +18,7 @@ Object *parse(TokenStream *stream)
     tok_stream_next(stream);
     return list;
   default:
+  {
     Object *atom = calloc(1, sizeof(Object));
     switch (tok_stream_peek(stream)->type)
     {
@@ -50,6 +51,7 @@ Object *parse(TokenStream *stream)
       atom->type = OBJ_SYMBOL;
       return atom;
     default:
+    {
       Token *tok = tok_stream_peek(stream);
       fprintf(
           stderr,
@@ -60,6 +62,8 @@ Object *parse(TokenStream *stream)
           tok->span->end);
       exit(1);
     }
+    }
+  }
   }
   tok_stream_free(stream);
 }
