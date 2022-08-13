@@ -119,6 +119,5 @@ TokenStream *lex(String src)
       break;
     }
   }
-  tok_stream_push(tok_stream, new_tok(TOK_EOF, "<Eof>", 0, 0));
   return tok_stream;
 }
