@@ -124,9 +124,8 @@ Token *tok_stream_peek(TokenStream *stream)
 
 void print_tok_stream(TokenStream *stream)
 {
-  while (true)
-  {
-    Token *tok = tok_stream_next(stream);
+  for (size_t i = 0; i < stream->count; i++) {
+    Token *tok = &stream->tokens[i];
     if (tok->type != TOK_EOF)
     {
       print_token(tok);
