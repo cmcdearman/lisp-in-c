@@ -1,5 +1,6 @@
 #include "lex.h"
 #include "parse.h"
+#include "token.h"
 
 int main()
 {
