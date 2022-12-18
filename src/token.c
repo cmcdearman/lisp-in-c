@@ -85,9 +85,9 @@ TokenStream *new_tok_stream()
 }
 
 void tok_stream_free(TokenStream *stream) {
-  for (size_t i = 0; i < stream->count; i++) {
-    tok_free(&stream->tokens[i]);
-  }
+  // for (size_t i = 0; i < stream->count; i++) {
+  //   tok_free(&stream->tokens[i]);
+  // }
   free(stream);
   stream = NULL;
 }
@@ -106,6 +106,7 @@ void tok_stream_push(TokenStream *stream, Token *tok)
     stream->tokens = tmp;
   }
   stream->tokens[stream->count++] = *tok;
+  tok_free(tok);
 }
 
 Token *tok_stream_next(TokenStream *stream)
