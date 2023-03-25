@@ -1,27 +1,22 @@
 #include "parse.h"
 #include "token.h"
 
-Object *parse(TokenStream *stream)
-{
-  switch (tok_stream_peek(stream)->type)
-  {
+Object *parse(TokenStream *stream) {
+  switch (tok_stream_peek(stream)->type) {
   case TOK_LPAREN:
     tok_stream_next(stream);
     Object *list = NULL;
     Object **tail = &list;
-    while (tok_stream_peek(stream)->type != TOK_RPAREN)
-    {
+    while (tok_stream_peek(stream)->type != TOK_RPAREN) {
       Object *car = parse(stream);
       *tail = cons(car, *tail);
       tail = &(*tail)->Cons.cdr;
     }
     tok_stream_next(stream);
     return list;
-  default:
-  {
+  default: {
     Object *atom = calloc(1, sizeof(Object));
-    switch (tok_stream_peek(stream)->type)
-    {
+    switch (tok_stream_peek(stream)->type) {
     case TOK_NUMBER:
       atom->Atom.Num.num = strtod(tok_stream_next(stream)->lit, NULL);
       atom->type = OBJ_NUMBER;
@@ -50,16 +45,12 @@ Object *parse(TokenStream *stream)
       atom->Atom.Symbol.sym = tok_stream_next(stream)->lit;
       atom->type = OBJ_SYMBOL;
       return atom;
-    default:
-    {
+    default: {
       Token *tok = tok_stream_peek(stream);
-      fprintf(
-          stderr,
-          "Error: unknown Token { Type: %s, Lit: %s } - <%zu, %zu>\n",
-          tok_type_to_str(tok->type),
-          tok->lit,
-          tok->span->start,
-          tok->span->end);
+      fprintf(stderr,
+              "Error: unknown Token { Type: %s, Lit: %s } - <%zu, %zu>\n",
+              tok_type_to_str(tok->type), tok->lit, tok->span->start,
+              tok->span->end);
       exit(1);
     }
     }
