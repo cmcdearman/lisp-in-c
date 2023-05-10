@@ -1,4 +1,4 @@
-CFLAGS = -std=c99 -Wall -g -Wno-parentheses -Wno-unused-const-variable
+CFLAGS = -std=c11 -Wall -g -Wno-parentheses -Wno-unused-const-variable
 SRC    = $(wildcard src/*.c)
 OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
 UNAME  = $(shell uname)
@@ -27,6 +27,9 @@ obj/%.o: src/%.c obj
 
 $(BIN): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+
+run: all
+	./$(BIN)
 
 clean:
 	rm -rf $(BIN) $(OBJ)
