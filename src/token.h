@@ -1,13 +1,12 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 #include "string.h"
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef enum
-{
+typedef enum {
   TOK_EOF,
   TOK_ERR,
 
@@ -28,8 +27,7 @@ typedef enum
   TOK_LAMBDA
 } TokenType;
 
-typedef struct
-{
+typedef struct {
   size_t start;
   size_t end;
 } Span;
@@ -37,8 +35,7 @@ typedef struct
 Span *new_span(size_t start, size_t end);
 void span_free(Span *);
 
-typedef struct
-{
+typedef struct {
   TokenType type;
   char *lit;
   Span *span;
@@ -51,8 +48,7 @@ void print_token(Token *);
 
 #define START_TOK_SIZE 10000UL
 
-typedef struct
-{
+typedef struct {
   Token *tokens;
   size_t count;
   size_t size;

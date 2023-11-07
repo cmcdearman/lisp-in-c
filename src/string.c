@@ -1,7 +1,6 @@
 #include "string.h"
 
-String string_from_file(String path)
-{
+String string_from_file(String path) {
   long len;
   char *buf;
   FILE *file;

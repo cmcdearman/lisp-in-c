@@ -1,7 +1,6 @@
 #include "token.h"
 
-Span *new_span(size_t start, size_t end)
-{
+Span *new_span(size_t start, size_t end) {
   Span *span = malloc(sizeof(Span));
   span->start = start;
   span->end = end;
@@ -14,8 +13,7 @@ void span_free(Span *span)
   span = NULL;
 }
 
-Token *new_tok(TokenType type, char *lit, size_t start, size_t end)
-{
+Token *new_tok(TokenType type, char *lit, size_t start, size_t end) {
   Token *tok = malloc(sizeof(Token));
   tok->type = type;
   tok->lit = lit;
@@ -30,10 +28,8 @@ void tok_free(Token *tok)
   tok = NULL;
 }
 
-String tok_type_to_str(TokenType type)
-{
-  switch (type)
-  {
+String tok_type_to_str(TokenType type) {
+  switch (type) {
   case TOK_EOF:
     return "EOF";
   case TOK_ERR:
@@ -66,18 +62,13 @@ String tok_type_to_str(TokenType type)
   return "";
 }
 
-void print_token(Token *tok)
-{
-  printf(
-      "Token { Type: %s, Lit: %s } - <%zu, %zu>\n",
-      tok_type_to_str(tok->type),
-      tok->lit,
-      tok->span->start,
-      tok->span->end);
+void print_token(Token *tok) {
+  printf("Token { Type: %s, Lit: %s } - <%zu, %zu>\n",
+         tok_type_to_str(tok->type), tok->lit, tok->span->start,
+         tok->span->end);
 }
 
-TokenStream *new_tok_stream()
-{
+TokenStream *new_tok_stream() {
   TokenStream *stream = calloc(1, sizeof(TokenStream));
   stream->tokens = calloc(START_TOK_SIZE, sizeof(Token));
   stream->count = 0;
@@ -95,10 +86,8 @@ void tok_stream_free(TokenStream *stream)
   stream = NULL;
 }
 
-void tok_stream_push(TokenStream *stream, Token *tok)
-{
-  if (stream->count == stream->size)
-  {
+void tok_stream_push(TokenStream *stream, Token *tok) {
+  if (stream->count == stream->size) {
     Token *tmp;
     stream->size *= 2;
     tmp = realloc(stream->tokens, stream->size * sizeof(Token));
@@ -113,30 +102,24 @@ void tok_stream_push(TokenStream *stream, Token *tok)
   tok_free(tok);
 }
 
-Token *tok_stream_next(TokenStream *stream)
-{
+Token *tok_stream_next(TokenStream *stream) {
   if (stream->size > stream->pos)
     return &stream->tokens[stream->pos++];
   return new_tok(TOK_EOF, "<Eof>", 0, 0);
 }
 
-Token *tok_stream_peek(TokenStream *stream)
-{
+Token *tok_stream_peek(TokenStream *stream) {
   if (stream->size > stream->pos)
     return &stream->tokens[stream->pos];
   return new_tok(TOK_EOF, "<Eof>", 0, 0);
 }
 
-void print_tok_stream(TokenStream *stream)
-{
-  for (size_t i = 0; i < stream->count; i++)
-  {
+void print_tok_stream(TokenStream *stream) {
+  for (size_t i = 0; i < stream->count; i++) {
     Token *tok = &stream->tokens[i];
-    if (tok->type != TOK_EOF)
-    {
+    if (tok->type != TOK_EOF) {
       print_token(tok);
-    }
-    else
+    } else
       break;
   }
 }
