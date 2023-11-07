@@ -34,6 +34,12 @@ clean:
 test: clean all
 	./$(BIN)
 
+run: clean all
+	./$(BIN)
+
 debug: clean all
 	$(GDB) ./$(BIN)
+
+leak: clean all
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(BIN)
 
